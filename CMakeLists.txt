@@ -65,10 +65,10 @@ elseif(UNIX)
 
                 set(OV_LIBRARY_URL "${OV_STORAGE_URL}/${OV_VERSION_SHORT}/${OV_PLATFORM}/l_openvino_toolkit_ubuntu${LSB_RELEASE_VERSION_SHORT}_${OV_VERSION}.tgz")
             else()
-                message(FATAL_ERROR "Ubuntu version ${LSB_RELEASE_VERSION} is unsupported")
+                message(STATUS "Ubuntu version ${LSB_RELEASE_VERSION} is unsupported")
             endif()
         else()
-            message(FATAL_ERROR "Linux distribution ${LSB_RELEASE_ID} is unsupported")
+            message(STATUS "Linux distribution ${LSB_RELEASE_ID} is unsupported")
         endif()
 
     endif()
@@ -78,11 +78,12 @@ endif ()
 
 message(STATUS "OpenVINO library URL: ${OV_LIBRARY_URL}")
 
-FetchContent_Declare(
-    openvino
-    URL ${OV_LIBRARY_URL}
-    )
-FetchContent_MakeAvailable(openvino)
+# Manually ensure openvino and openvino-devel are installed
+# FetchContent_Declare(
+#     openvino
+#     URL ${OV_LIBRARY_URL}
+#     )
+# FetchContent_MakeAvailable(openvino)
 
 find_package(OpenVINO REQUIRED PATHS ${openvino_SOURCE_DIR}/runtime/cmake)
 
