@@ -78,12 +78,12 @@ endif ()
 
 message(STATUS "OpenVINO library URL: ${OV_LIBRARY_URL}")
 
-# Manually ensure openvino and openvino-devel are installed
-# FetchContent_Declare(
-#     openvino
-#     URL ${OV_LIBRARY_URL}
-#     )
-# FetchContent_MakeAvailable(openvino)
+# Ensure openvino and openvino-devel are installed
+FetchContent_Declare(
+    openvino
+    URL ${OV_LIBRARY_URL}
+    )
+FetchContent_MakeAvailable(openvino)
 
 find_package(OpenVINO REQUIRED PATHS ${openvino_SOURCE_DIR}/runtime/cmake)
 
